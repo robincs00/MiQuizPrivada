@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Quiz Privado</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+    <div id="login-screen">
+        <div class="login-card">
+            <h1>🔐 Acceso Restringido</h1>
+            <p>Introduce la clave para entrar al Quiz</p>
+            <input type="password" id="admin-pass" placeholder="Contraseña">
+            <button onclick="checkAccess()">Entrar</button>
+        </div>
+    </div>
+
+    <div id="main-app" class="hide">
+        
+        <aside id="sidebar">
+            <h2>Opciones</h2>
+            <ul>
+                <li><button onclick="showSection('quiz-section')">🎮 Resolver Quiz</button></li>
+                <li><button onclick="showSection('admin-section')">➕ Añadir Preguntas</button></li>
+                <li><button onclick="showSection('score-section')">📊 Ver Puntuaciones</button></li>
+                <li><button onclick="logout()" id="logout-btn">🚪 Cerrar Sesión</button></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <section id="quiz-section" class="active">
+                <h1>🧠 Quiz Master</h1>
+                <div id="quiz-container">
+                    <h2 id="question">Cargando pregunta...</h2>
+                    <div id="answer-buttons" class="btn-grid"></div>
+                    
+                    <div id="controls">
+                        <div class="nav-buttons">
+                            <button id="prev-btn" onclick="anteriorPregunta()">⬅️ Anterior</button>
+                            <button id="next-btn" onclick="siguientePregunta()">Siguiente ➡️</button>
+                        </div>
+                        
+                        <button id="finish-btn" class="hide" onclick="finalizarQuiz()">
+                            ✅ Finalizar y Ver Resultados
+                        </button>
+                        
+                        <div class="quiz-info">
+                            <p>Pregunta <span id="current-number">1</span> de <span id="total-questions">0</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="review-container" class="hide">
+                    <h2>Resultados de la Revisión</h2>
+                    <div id="review-list"></div>
+                    <button onclick="location.reload()" class="btn-restart">🔄 Reiniciar Quiz</button>
+                </div>
+            </section>
+
+            <section id="admin-section" class="hide">
+                <h2>Añadir Nueva Pregunta</h2>
+                <div class="form-group">
+                    <input type="text" id="new-question" placeholder="Escribe la pregunta">
+                    
+                    <div class="option-input">
+                        <input type="text" class="opt" placeholder="Opción 1">
+                        <label><input type="radio" name="correct-check" value="0" checked> Correcta</label>
+                    </div>
+                    <div class="option-input">
+                        <input type="text" class="opt" placeholder="Opción 2">
+                        <label><input type="radio" name="correct-check" value="1"> Correcta</label>
+                    </div>
+                    <div class="option-input">
+                        <input type="text" class="opt" placeholder="Opción 3">
+                        <label><input type="radio" name="correct-check" value="2"> Correcta</label>
+                    </div>
+                    <div class="option-input">
+                        <input type="text" class="opt" placeholder="Opción 4">
+                        <label><input type="radio" name="correct-check" value="3"> Correcta</label>
+                    </div>
+                    
+                    <button onclick="saveQuestion()">💾 Guardar Pregunta</button>
+                </div>
+
+                <div class="danger-zone">
+                    <button onclick="clearAllQuestions()" id="delete-all-btn">
+                        🗑️ Eliminar TODAS las preguntas
+                    </button>
+                </div>
+            </section>
+
+            <section id="score-section" class="hide">
+                <h2>📊 Historial de Puntajes</h2>
+                <div id="high-scores-list"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="./scripts.js"></script>
+</body>
+</html>
